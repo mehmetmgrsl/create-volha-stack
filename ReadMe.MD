@@ -59,6 +59,20 @@ In order to use voltctl you need to expose the voltha-api service:
 ```kubectl -n voltha port-forward --address 0.0.0.0 svc/voltha-voltha-api 55555```
 
 
+### Running the sanity tests
+
+Define the KUBECONFIG and VOLTCONFIG env variables. i.e below:
+
+```export KUBECONFIG=~/.kube/config```
+
+```export VOLTCONFIG=~/.volt/config```
+
+
+```git clone https://github.com/opencord/voltha-system-tests```
+
+```make -C voltha-system-tests sanity-single-kind```
+
+
 ### Deleting the K8S Cluster
 
 ```eksctl delete cluster --region=eu-west-1 --name=next-try-out-cluster```
