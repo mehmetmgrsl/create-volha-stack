@@ -59,7 +59,48 @@ In order to use voltctl you need to expose the voltha-api service:
 ```kubectl -n voltha port-forward --address 0.0.0.0 svc/voltha-voltha-api 55555```
 
 
-### Running the sanity tests
+### 7. Sanity Checks
+
+As first make sure that all components are running correctly:
+
+```shell
+$ kubectl get pods -A
+NAMESPACE     NAME                                                            READY   STATUS    RESTARTS      AGE
+infra         bbsim-sadis-server-7547584ff6-nhf8f                             1/1     Running   0             17m
+infra         voltha-infra-etcd-0                                             1/1     Running   0             17m
+infra         voltha-infra-freeradius-859fb6c4c9-jqlbs                        1/1     Running   0             17m
+infra         voltha-infra-kafka-0                                            1/1     Running   1 (16m ago)   17m
+infra         voltha-infra-onos-classic-0                                     1/1     Running   0             17m
+infra         voltha-infra-onos-classic-onos-config-loader-7b578bfcb4-cjr5k   1/1     Running   0             17m
+infra         voltha-infra-zookeeper-0                                        1/1     Running   0             17m
+voltha        bbsim0-57b6dd9d77-nbr6n                                         1/1     Running   0             14m
+voltha        voltha-voltha-adapter-openolt-58b78b5fd-gkfz4                   1/1     Running   0             14m
+voltha        voltha-voltha-adapter-openonu-69b8d644b-66vpx                   1/1     Running   0             14m
+voltha        voltha-voltha-ofagent-7459fccc84-gfmg8                          1/1     Running   0             14m
+voltha        voltha-voltha-rw-core-677bb9488d-ht8wd                          1/1     Running   0             14m
+```
+
+### 8. Provisioning an OLT
+
+Once you completed the `Sanity Checks` you can provision an OLT.
+
+To create and enable the OLT device in VOLTHA you can use `voltctl` commands below:
+
+```shell
+voltctl device create -t openolt -H bbsim0.voltha.svc:50060
+voltctl device list --filter Type~openolt -q | xargs voltctl device enable
+```
+
+Once the OLT device is enabled you will see that an emulated ONU is reported to VOLTHA:
+
+```shell
+$ voltctl device list
+ID                                      TYPE                 ROOT     PARENTID                                SERIALNUMBER    ADDRESS                       ADMINSTATE    OPERSTATUS    CONNECTSTATUS    REASON
+8d861c7c-084b-49df-88bb-dcf3fa5060fc    openolt              true     70f03197-e663-49ef-b46c-4094ed2d29c1    BBSIM_OLT_10    &{bbsim0.voltha.svc:50060}    ENABLED       ACTIVE        REACHABLE        
+15dad8f9-6bfe-4242-8377-d0571cb170c4    brcm_openomci_onu    false    8d861c7c-084b-49df-88bb-dcf3fa5060fc    BBSM000a0001    <nil>                         ENABLED       ACTIVE        REACHABLE        omci-flows-pushed
+```
+
+### 9. Running the sanity tests
 
 Define the KUBECONFIG and VOLTCONFIG env variables. i.e below:
 
