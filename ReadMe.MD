@@ -80,7 +80,7 @@ voltha        voltha-voltha-ofagent-7459fccc84-gfmg8                          1/
 voltha        voltha-voltha-rw-core-677bb9488d-ht8wd                          1/1     Running   0             14m
 ```
 
-### 8. Provisioning an OLT
+#### 7.1. Provisioning an OLT
 
 Once you completed the `Sanity Checks` you can provision an OLT.
 
@@ -100,7 +100,7 @@ ID                                      TYPE                 ROOT     PARENTID  
 15dad8f9-6bfe-4242-8377-d0571cb170c4    brcm_openomci_onu    false    8d861c7c-084b-49df-88bb-dcf3fa5060fc    BBSM000a0001    <nil>                         ENABLED       ACTIVE        REACHABLE        omci-flows-pushed
 ```
 
-### 9. Running the sanity tests
+#### 7.2. Running the sanity tests
 
 Define the KUBECONFIG and VOLTCONFIG env variables. i.e below:
 
@@ -114,7 +114,7 @@ Define the KUBECONFIG and VOLTCONFIG env variables. i.e below:
 ```make -C voltha-system-tests sanity-single-kind```
 
 
-### Deleting the K8S Cluster
+### 8. Deleting the K8S Cluster
 
 ```eksctl delete cluster --region=eu-west-1 --name=next-try-out-cluster```
 
