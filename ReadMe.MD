@@ -2,7 +2,7 @@
 
 Run the following command to create a K8S cluster named 'next-try-out-cluster' on AWS.
 
-```eksctl create cluster --name next-try-out-cluster --version 1.23 --region eu-west-1 --nodegroup-name worker-nodes --node-type t2.large --nodes 2 --nodes-min 2 --nodes-max 3```
+```eksctl create cluster --name next-try-out-cluster --version 1.25 --region eu-west-1 --nodegroup-name worker-nodes --node-type t2.large --nodes 2 --nodes-min 2 --nodes-max 3```
 
 ### 2. Prerequisites
 
@@ -16,8 +16,13 @@ Run the following command to create a K8S cluster named 'next-try-out-cluster' o
 ### 3. Install VOLTHA infrastructure
 
 #### 3.1. via helm-chart
-```helm upgrade --install --create-namespace -n infra voltha-infra onf/voltha-infra```
+##### 3.1.1. If you have a K8S cluster >= v1.25
+###### Apply ->  https://github.com/opencord/voltha-helm-charts/issues/5#issuecomment-1466006762 
+###### Run -> ```helm upgrade --install --create-namespace -n infra voltha-infra ./voltha-infra/```
+##### 3.1.2. If you have a K8S cluster < v1.25
+###### Run -> ```helm upgrade --install --create-namespace -n infra voltha-infra onf/voltha-infra```
 
+ helm upgrade --install --create-namespace -n infra voltha-infra onf/voltha-infra
 #### 3.2. Accessing ONOS GUI
 ```kubectl port-forward -n infra svc/voltha-infra-onos-classic-hs 8181```
 
