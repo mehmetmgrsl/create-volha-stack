@@ -2,7 +2,7 @@
 
 Run the following command to create a K8S cluster named 'next-try-out-cluster' on AWS.
 
-```eksctl create cluster --name next-try-out-cluster --version 1.25 --region eu-west-1 --nodegroup-name worker-nodes --node-type t2.large --nodes 2 --nodes-min 2 --nodes-max 3```
+```eksctl create cluster --name next-try-out-cluster --version 1.25 --region eu-west-1 --nodegroup-name worker-nodes --node-type t2.large --nodes 3 --nodes-min 3 --nodes-max 4```
 
 ### 2. Prerequisites
 
