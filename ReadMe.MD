@@ -58,12 +58,6 @@ sudo chmod +x /usr/local/bin/voltctl
 source <(voltctl completion bash)
 ```
 
-```
-sudo wget https://github.com/opencord/voltctl/archive/refs/tags/v3.41.3204.tar.gz -O /usr/local/bin/voltctl
-sudo chmod +x /usr/local/bin/voltctl
-source <(voltctl completion bash)
-```
-
 In order to use voltctl you need to expose the voltha-api service:
 
 ```kubectl -n voltha port-forward --address 0.0.0.0 svc/voltha-voltha-api 55555```
