@@ -48,6 +48,17 @@ Then open a browser and access the dashboard with the address below:
 ### 6. Installing and Configuring voltctl
 
 ```
+HOSTOS="$(uname -s | tr "[:upper:]" "[:lower:"])"
+HOSTARCH="$(uname -m | tr "[:upper:]" "[:lower:"])"
+if [ "$HOSTARCH" == "x86_64" ]; then
+    HOSTARCH="amd64"
+fi
+sudo wget https://github.com/opencord/voltctl/releases/download/v1.1.4/voltctl-1.1.4-$HOSTOS-$HOSTARCH -O /usr/local/bin/voltctl
+sudo chmod +x /usr/local/bin/voltctl
+source <(voltctl completion bash)
+```
+
+```
 sudo wget https://github.com/opencord/voltctl/archive/refs/tags/v3.41.3204.tar.gz -O /usr/local/bin/voltctl
 sudo chmod +x /usr/local/bin/voltctl
 source <(voltctl completion bash)
