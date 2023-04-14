@@ -22,7 +22,6 @@ Run the following command to create a K8S cluster named 'next-try-out-cluster' o
 ##### 3.1.2. If you have a K8S cluster < v1.25
 ###### Run -> ```helm upgrade --install --create-namespace -n infra voltha-infra onf/voltha-infra```
 
- helm upgrade --install --create-namespace -n infra voltha-infra onf/voltha-infra
 #### 3.2. Accessing ONOS GUI
 ```kubectl port-forward -n infra svc/voltha-infra-onos-classic-hs 8181```
 
